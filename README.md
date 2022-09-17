@@ -8,6 +8,8 @@
 - [コード実行例](#コード実行例)
 - [テストの実行](#テストの実行)
   - [参考 URL](#参考-url)
+- [エラーまとめ](#エラーまとめ)
+- [API サンプル実行方法](#api-サンプル実行方法)
 
 <!-- /TOC -->
 
@@ -48,3 +50,21 @@ package .: no Go files in 絶対パス
 ## 参考 URL
 
 https://andmorefine.gitbook.io/learn-go-with-tests/go-fundamentals/hello-world
+
+# エラーまとめ
+
+- `function main is undeclared in the main package`
+  → main 関数が存在しない
+- `main redeclared in this block previous declaration at ./hello.go:12:6`
+  → main という関数名が被っている
+
+# API サンプル実行方法
+
+`apiSample/endpoint.go` に定義された処理を使う
+
+```terminal
+docker-compose build # 関数やDockerfileなどに変更があった場合のみ
+docker-compose up
+```
+
+すると http://localhost:8085 で hello というレスポンスが返ってくる
