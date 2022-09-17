@@ -1,6 +1,12 @@
 # Go 言語のインストール
 
-[Download and install](https://go.dev/doc/install)
+[Download and install](https://go.dev/doc/install) に従う  
+↓ のようになればインストール OK
+
+```go
+$ go version
+go version go1.15.7 darwin/amd64
+```
 
 # 参考記事
 
