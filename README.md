@@ -10,6 +10,11 @@
   - [参考 URL](#参考-url)
 - [エラーまとめ](#エラーまとめ)
 - [API サンプル実行方法](#api-サンプル実行方法)
+- [CRUD API 実行方法](#crud-api-実行方法)
+  - [CREATE](#create)
+  - [READ](#read)
+  - [UPDATE](#update)
+  - [DELETE](#delete)
 - [ローカル環境 sequel pro 設定値](#ローカル環境-sequel-pro-設定値)
 - [必要ライブラリインストールコマンド](#必要ライブラリインストールコマンド)
 
@@ -65,11 +70,91 @@ https://andmorefine.gitbook.io/learn-go-with-tests/go-fundamentals/hello-world
 `apiSample/endpoint.go` に定義された処理を使う
 
 ```sh
-docker-compose build # 関数やDockerfileなどに変更があった場合のみ
+# helloWorld用
+COPY ./apiSample/endpoint.go .
+
+# 〜略〜
+
+# helloWorld用
+CMD ["go", "run", "endpoint.go"]
+```
+
+を有効にして
+
+```sh
+docker-compose build # 関数やDockerfileなどに変更があった場合に必要
 docker-compose up
 ```
 
 すると http://localhost:8085 で hello というレスポンスが返ってくる
+
+# CRUD API 実行方法
+
+```sh
+# todoアプリのcrud用（gin使用）
+COPY ./crud/main.go .
+
+# 〜略〜
+
+# todoアプリのcrud用（gin使用）
+CMD ["go", "run", "main.go"]
+```
+
+を有効にして
+
+```
+docker-compose build
+docker-compose up
+```
+
+## CREATE
+
+```sh
+$ curl --location --request POST 'http://localhost:8085/todo'
+{"id":8,"createdAt":"2022-09-17T16:01:05.686Z","updatedAt":"2022-09-17T16:01:05.686Z","deletedAt":null,"name":""}
+```
+
+という感じでレコードを create できる。
+name とかは パラメータ から受け取っていないので、
+受け取って更新できるようにしたい
+
+## READ
+
+```sql
+INSERT INTO `todos` (`id`, `created_at`, `updated_at`, `deleted_at`, `name`)
+VALUES
+	(2, '2022-01-01 00:00:00.000', '2022-01-01 00:00:00.000', NULL, 'aaaaaa');
+```
+
+のようなレコードがあれば、
+http://localhost:8085/todo/2
+で見られる
+
+## UPDATE
+
+```sh
+$ curl --location --request PUT 'http://localhost:8085/todo/5'
+{"id":5,"createdAt":"2022-09-17T15:56:24.767Z","updatedAt":"2022-09-17T16:07:21.169Z","deletedAt":null,"name":""}
+```
+
+で update 可能。
+updated_at が更新される。
+
+## DELETE
+
+```sh
+$ curl --location --request DELETE 'http://localhost:8085/todo/3'
+{
+    "id": 3,
+    "createdAt": "2022-09-17T15:56:05.378Z",
+    "updatedAt": "2022-09-17T15:56:05.378Z",
+    "deletedAt": "2022-09-17T16:05:43.92Z",
+    "name": ""
+}
+```
+
+という感じで delete 可能
+deleted_at にタイムスタンプが入る論理削除。
 
 # ローカル環境 sequel pro 設定値
 
@@ -80,4 +165,11 @@ docker-compose up
 
 ```sh
 go get -u github.com/gorilla/mux # 参考：https://github.com/gorilla/mux
+
+# 参考：https://liginc.co.jp/584227 でCRUD作成の項目でimportしているライブラリをinstall
+go get -u gorm.io/gorm
+go get -u gorm.io/driver/mysql
+go get -u github.com/gin-gonic/gin
 ```
+
+→ .sh ファイルか docker 管理にする
