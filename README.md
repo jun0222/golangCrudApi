@@ -1,3 +1,7 @@
+# Go 言語のインストール
+
+[Download and install](https://go.dev/doc/install)
+
 # 参考記事
 
 - [フロントエンドエンジニアが Go 言語で ToDo リスト API を作ってみた](https://liginc.co.jp/584227)
