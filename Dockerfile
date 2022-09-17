@@ -3,9 +3,17 @@ FROM golang:alpine3.15
 
 WORKDIR /api
 
-COPY ./apiSample/endpoint.go .
+# helloWorld用
+# COPY ./apiSample/endpoint.go .
+
+# todoアプリのcrud用（gin使用）
+COPY ./crud/main.go .
 
 RUN go mod init todo && go mod tidy
 
 # .に./apiSample/endpoint.goをCOPYした後なのでendpoint.goと相対パスを指定
-CMD ["go", "run", "endpoint.go"]
+# helloWorld用
+# CMD ["go", "run", "endpoint.go"] 
+
+# todoアプリのcrud用（gin使用）
+CMD ["go", "run", "main.go"]
