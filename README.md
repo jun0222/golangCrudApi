@@ -23,7 +23,7 @@
 
 # 概要
 
-Go/Gin/Gorm/MySQL を使った CRUD API
+Go/Gin/Gorm/Docker/MySQL を使った CRUD API
 
 # 参考サイト
 
