@@ -10,6 +10,7 @@
   - [参考 URL](#参考-url)
 - [エラーまとめ](#エラーまとめ)
 - [API サンプル実行方法](#api-サンプル実行方法)
+- [ローカル環境 sequel pro 設定値](#ローカル環境-sequel-pro-設定値)
 
 <!-- /TOC -->
 
@@ -68,3 +69,8 @@ docker-compose up
 ```
 
 すると http://localhost:8085 で hello というレスポンスが返ってくる
+
+# ローカル環境 sequel pro 設定値
+
+![picture 1](images/46ec2656b4aa081d7922b0be6e7ae7b9b4c0a3855ca5971b7a090e1490bc1ad5.png)
+パスワードは xxx
