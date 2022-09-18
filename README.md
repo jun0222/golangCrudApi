@@ -175,6 +175,7 @@ go get -u github.com/gorilla/mux # 参考：https://github.com/gorilla/mux
 go get -u gorm.io/gorm
 go get -u gorm.io/driver/mysql
 go get -u github.com/gin-gonic/gin
+go get -u strconv
 ```
 
-→ .sh ファイルか docker 管理にする
+→ .sh ファイルか docker 管理にする（setting.json？go.mod？）

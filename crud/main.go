@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+	"strconv"
 	"time"
 
 	"github.com/gin-gonic/gin"
@@ -54,6 +55,21 @@ func main() {
 			fmt.Println(err)
 		}
 		c.JSON(http.StatusOK, todo)
+	})
+
+	// 複数件read
+	// 参考：https://gorm.io/ja_JP/docs/query.html
+	engine.GET("/todos/:limit", func(c *gin.Context) {
+		// 参考：https://qiita.com/hyo_07/items/59c093dda143325b1859
+		todos := []Todo{}
+		limit := c.Param("limit")
+		// 参考：https://qiita.com/lostfind/items/ad7bfc1a4860bb108b9c
+		limitInt, _ := strconv.Atoi(limit)
+		// if err := db.Find(&todos).Error; err != nil {
+		if err := db.Limit(limitInt).Find(&todos).Error; err != nil {
+			fmt.Println(err)
+		}
+		c.JSON(http.StatusOK, todos)
 	})
 
 	// update
