@@ -14,6 +14,8 @@
 - [CRUD API 実行方法](#crud-api-実行方法)
   - [CREATE](#create)
   - [READ](#read)
+    - [1 件の場合](#1-件の場合)
+    - [複数件の場合](#複数件の場合)
   - [UPDATE](#update)
   - [DELETE](#delete)
 - [ローカル環境 sequel pro 設定値](#ローカル環境-sequel-pro-設定値)
@@ -125,6 +127,8 @@ name とかは パラメータ から受け取っていないので、
 
 ## READ
 
+### 1 件の場合
+
 ```sql
 INSERT INTO `todos` (`id`, `created_at`, `updated_at`, `deleted_at`, `name`)
 VALUES
@@ -134,6 +138,14 @@ VALUES
 のようなレコードがあれば、
 http://localhost:8085/todo/2
 で見られる
+
+### 複数件の場合
+
+http://localhost:8085/todos  
+で全件見られる。
+
+http://localhost:8085/todos/3  
+とすると先頭から 3 件見られる
 
 ## UPDATE
 
