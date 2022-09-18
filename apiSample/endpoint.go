@@ -22,5 +22,5 @@ func main() {
 
 // この関数内容を変更して反映する場合もdocker-compose buildしてから、docker-compose upする
 func hello(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprint(w, "Hellod")
+	fmt.Fprint(w, "Hello")
 }
